@@ -1,86 +1,86 @@
-// Variables globales
-let compteur = 0 // Compteur qui permettra de savoir sur quelle slide nous sommes
+// global variables
+//Counter which will allow you to know which slide you are on
+let counter = 0;
 let timer, elements, slides, slideWidth;
 
 window.onload = () => {
-    // On récupère le conteneur principal du diaporama
-    const diapo = document.querySelector(".diapo")
+    // div container recovery(".diapo")
+    const diapo = document.querySelector(".diapo");
 
-    // On récupère le conteneur de tous les éléments
-    elements = document.querySelector(".elements")
+    // recovery of the container of all elements
+    elements = document.querySelector(".elements");
 
-    // On récupère un tableau contenant la liste des diapos
-    slides = Array.from(elements.children)
+    // recovery the table containing the list of slides
+    slides = Array.from(elements.children);
 
-    // On calcule la largeur visible du diaporama
-    slideWidth = diapo.getBoundingClientRect().width
+    // calculate the visible width of the slideshow
+    slideWidth = diapo.getBoundingClientRect().width;
 
-    // On récupère les deux flèches
-    let next = document.querySelector("#nav-droite")
-    let prev = document.querySelector("#nav-gauche")
+    // arrows recovery
+    let next = document.querySelector("#navRight");
+    let prev = document.querySelector("#navLeft");
 
-    // On met en place les écouteurs d'évènements sur les flèches
-    next.addEventListener("click", slideNext)
-    prev.addEventListener("click", slidePrev)
+    // installation of event listeners on arrows
+    next.addEventListener("click", slideNext);
+    prev.addEventListener("click", slidePrev);
 
-    // Automatiser le diaporama
-    timer = setInterval(slideNext, 4000)
+    // automate slide
+    timer = setInterval(slideNext, 4000);
 
-    // Gérer le survol de la souris
-    diapo.addEventListener("mouseover", stopTimer)
-    diapo.addEventListener("mouseout", startTimer)
+    // Manage mouse hover
+    diapo.addEventListener("mouseover", stopTimer);
+    diapo.addEventListener("mouseout", startTimer);
 
-    // Mise en oeuvre du "responsive"
+    //Implementation of "responsive"
     window.addEventListener("resize", () => {
-        slideWidth = diapo.getBoundingClientRect().width
-        slideNext()
-    })
+        slideWidth = diapo.getBoundingClientRect().width;
+        slideNext();
+    });
 }
 
 /**
- * Cette fonction fait défiler le diaporama vers la droite
+ * scroll the slide to the right
  */
-function slideNext(){
-    // On incrémente le compteur
-    compteur++
+function slideNext() {
+    counter++;
 
-    // Si on dépasse la fin du diaporama, on "rembobine"
-    if(compteur === slides.length){
-        compteur = 0
+    // beyond the end of the slide show, we "rewind"
+    if(counter === slides.length) {
+        counter = 0;
     }
 
-    // On calcule la valeur du décalage
-    let decal = -slideWidth * compteur
+    // calculate the offset value
+    let decal = -slideWidth * counter
     elements.style.transform = `translateX(${decal}px)`
 }
 
 /**
- * Cette fonction fait défiler le diaporama vers la gauche
+ * scroll the slideshow to the left
  */
-function slidePrev(){
-    // On décrémente le compteur
-    compteur--
+function slidePrev() {
+    //decrement
+    counter--;
 
-    // Si on dépasse le début du diaporama, on repart à la fin
-    if(compteur < 0){
-        compteur = slides.length - 1
+    // If we go beyond the beginning of the slideshow, we start again at the end
+    if(counter < 0) {
+        counter = slides.length - 1;
     }
 
-    // On calcule la valeur du décalage
-    let decal = -slideWidth * compteur
-    elements.style.transform = `translateX(${decal}px)`
+    // calculate the offset value
+    let decal = -slideWidth * counter;
+    elements.style.transform = `translateX(${decal}px)`;
 }
 
 /**
- * On stoppe le défilement
+ * stop scrolling
  */
-function stopTimer(){
-    clearInterval(timer)
+function stopTimer() {
+    clearInterval(timer);
 }
 
 /**
- * On redémarre le défilement
+ * restart scrolling
  */
-function startTimer(){
-    timer = setInterval(slideNext, 4000)
+function startTimer() {
+    timer = setInterval(slideNext, 4000);
 }

@@ -1,18 +1,20 @@
-body{
+body {
     margin: 0;
+    padding: 3rem ;
 }
 
-main{
+main {
     width: 80%;
     margin: auto;
 }
 
-.diapo{
+.diapo {
     position: relative;
     overflow: hidden;
 }
 
-#nav-droite, #nav-gauche{
+/*placement arrows*/
+#navRight, #navLeft {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -20,28 +22,32 @@ main{
     font-size: 3em;
 }
 
-#nav-droite{
+#navRight {
     right: 20px;
 }
-#nav-gauche{
+
+#navLeft {
     left: 20px;
 }
 
-.elements{
+/*placement diapo*/
+.elements {
     display: flex;
     transition: 1s linear;
 }
 
-.element{
+.element {
     flex: 1 0 100%;
     position: relative;
 }
 
-.element > img{
+/*size img*/
+.element > img {
     width: 100%;
 }
 
-.caption{
+/*text*/
+.caption {
     position: absolute;
     top: 50%;
     left: 50%;
